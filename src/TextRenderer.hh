@@ -16,8 +16,8 @@ protected:
     TextObject(std::string text, UniqueTexture texture, glm::ivec2 size) :
         text(std::move(text)), texture(std::move(texture)), size(size) {}
 public:
-    operator std::string() const { return text; }
-    operator SDL_Texture*() const { return texture.get(); }
+    std::string Text() const { return text; }
+    SDL_Texture* Texture() const { return texture.get(); }
     glm::ivec2 Size() const { return size; }
 
     friend class TextRenderer;
@@ -41,7 +41,7 @@ public:
     void RenderBaked(const TextObject& to, glm::ivec2 pos) const {
         glm::ivec2 size = to.Size();
         SDL_Rect dst = {pos.x,pos.y,size.x,size.y};
-        SDL_RenderCopy(r, to, nullptr, &dst);
+        SDL_RenderCopy(r, to.Texture(), nullptr, &dst);
     }
 
     void RenderDirect(std::string text, glm::ivec2 pos) const {

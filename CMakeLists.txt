@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.8.3)
 file(GLOB_RECURSE sources src/*.cc src/*.hh)
 file(GLOB_RECURSE data data/*)
 
-add_executable(${PROJECT_NAME} ${sources} ${data})
+add_executable(${PROJECT_NAME} ${sources} ${data} ${gen_input})
 
 file(COPY ${data} DESTINATION data)
 
@@ -24,3 +24,6 @@ target_link_libraries(${PROJECT_NAME}
   ${SDL2TTF_LIBRARIES}
 )
 
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Arne Döring <arne.doering@gmx.net>")
+
+include(CPack)
